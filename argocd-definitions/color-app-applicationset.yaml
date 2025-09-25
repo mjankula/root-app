@@ -11,7 +11,7 @@ spec:
           # Generator 1: Reads the config.json file from your Git repo.
           # It will produce a list of elements, each with 'namespace' and 'color'.
           - git:
-              repoURL: 'https://github.com/your-org/your-gitops-repository.git' # <-- Change to your repo URL
+              repoURL: 'https://github.com/mjankula/root-app.git' # <-- Change to your repo URL
               revision: main
               files:
                 - path: "my-webapp/environments/config.json"
