@@ -14,7 +14,7 @@ spec:
   # The template for the Argo CD Application remains the same.
   template:
     metadata:
-      name: 'color-app-change-{{namespace}}' # {{name}} will now be 'blue'
+      name: 'color-app-change2-{{namespace}}' # {{name}} will now be 'blue'
       namespace: openshift-gitops
     spec:
       project: default
