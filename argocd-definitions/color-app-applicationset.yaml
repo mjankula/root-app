@@ -5,24 +5,11 @@ metadata:
   namespace: openshift-gitops
 spec:
   generators:
-    # The matrix generator combines the results of two other generators.
-    - matrix:
-        generators:
-          # Generator 1: Reads the config.json file from your Git repo.
-          # It will produce a list of elements, each with 'namespace' and 'color'.
-          - git:
-              repoURL: 'https://github.com/mjankula/root-app.git' # <-- Change to your repo URL
-              revision: main
-              files:
-                - path: "my-webapp/environments/config.json"
-
-          # Generator 2: Gets the information about the cluster.
-          # We only need this to get the cluster's server URL.
-          - clusters:
-              selector:
-                # Select the local OpenShift cluster
-                kubernetes.io/metadata.name: in-cluster
-
+    - git:
+        repoURL: 'https://github.com/mjankula/root-app.git' # <-- Change to your repo URL
+        revision: main
+        files:
+          - path: "my-webapp/environments/config.json"
 
   # The template for the Argo CD Application remains the same.
   template:
