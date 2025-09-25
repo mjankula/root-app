@@ -5,36 +5,35 @@ metadata:
   namespace: openshift-gitops
 spec:
   generators:
-    - clusters:
-        selector: {}
-        filters:
-          - key: metadata.labels['argocd.argoproj.io/managed-by']
-            operator: In
-            values:
-              - color-app-set
-  
+    # Use the 'clusterResource' generator to find resources based on a label.
+    - clusterResource:
+        resource: projects
+        # This selector finds all Projects with the matching label.
+        selector:
+          matchLabels:
+            argocd.argoproj.io/managed-by: color-app-set
+        template:
+          name: '{{.metadata.name}}'
+
+  # The template for the Argo CD Application remains the same.
   template:
     metadata:
-      name: 'color-app-{{name}}' # e.g., 'color-app-blue'
+      name: 'color-app-{{name}}' # {{name}} will now be 'blue'
       namespace: openshift-gitops
     spec:
       project: default
       destination:
         server: 'https://kubernetes.default.svc'
-        namespace: '{{name}}' # Deploy to the discovered namespace, e.g., 'blue'
+        namespace: '{{name}}' # Deploys to the 'blue' namespace
 
-      # --- SOURCE MODIFIED TO USE HELM ---
       source:
-        repoURL: 'https://github.com/mjankula/root-app.git' # <-- Change to your repo URL
+        repoURL: 'https://github.com/mjankula/root-app.git' 
         targetRevision: main
-        path: my-webapp/helm-chart # Path to the Helm chart
-        
+        path: my-webapp/helm-chart
         helm:
-          # This passes the namespace name from the generator into the Helm chart
-          # as the 'color' value.
           parameters:
             - name: 'color'
-              value: '{{name}}' # {{name}} will be 'blue', 'green', etc.
+              value: '{{name}}' # Passes 'blue' as the Helm value
       
       syncPolicy:
         automated:
