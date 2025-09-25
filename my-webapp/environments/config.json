@@ -1,8 +1,8 @@
 [
   { "namespace": "blue", "color": "blue" },
   { "namespace": "green", "color": "green" },
-  { "namespace": "red", "color": "red" }
-  { "namespace": "pink", "color": "pink" }
-  { "namespace": "yellow", "color": "yellow" }
+  { "namespace": "red", "color": "red" },
+  { "namespace": "pink", "color": "pink" },
+  { "namespace": "yellow", "color": "yellow" },
   { "namespace": "white", "color": "white" }
 ]
