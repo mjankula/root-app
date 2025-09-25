@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: color-webapp-service
+spec:
+  # This selector ensures the service targets the pods created by your deployment
+  selector:
+    app: color-webapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

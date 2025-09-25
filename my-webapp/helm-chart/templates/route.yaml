@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: color-webapp-route
+spec:
+  to:
+    kind: Service
+    # This must match the name of the Service defined above
+    name: color-webapp-service
+  port:
+    # This must match a port name or targetPort in the Service
+    targetPort: 8080

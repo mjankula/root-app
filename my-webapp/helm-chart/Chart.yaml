@@ -1,0 +1,4 @@
+apiVersion: v2
+name: color-app
+description: A web application that displays a color based on the environment.
+version: 0.1.0

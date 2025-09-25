@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: color-app-set
+  namespace: openshift-gitops
+spec:
+  generators:
+    - clusters:
+        selector: {}
+        filters:
+          - key: metadata.labels['argocd.argoproj.io/managed-by']
+            operator: In
+            values:
+              - color-app-set
+  
+  template:
+    metadata:
+      name: 'color-app-{{name}}' # e.g., 'color-app-blue'
+      namespace: openshift-gitops
+    spec:
+      project: default
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{name}}' # Deploy to the discovered namespace, e.g., 'blue'
+
+      # --- SOURCE MODIFIED TO USE HELM ---
+      source:
+        repoURL: 'https://github.com/mjankula/root-app.git' # <-- Change to your repo URL
+        targetRevision: main
+        path: my-webapp/helm-chart # Path to the Helm chart
+        
+        helm:
+          # This passes the namespace name from the generator into the Helm chart
+          # as the 'color' value.
+          parameters:
+            - name: 'color'
+              value: '{{name}}' # {{name}} will be 'blue', 'green', etc.
+      
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
