@@ -14,13 +14,13 @@ spec:
   # The template for the Argo CD Application remains the same.
   template:
     metadata:
-      name: 'color-app-{{name}}' # {{name}} will now be 'blue'
+      name: 'color-app-{{namespace}}' # {{name}} will now be 'blue'
       namespace: openshift-gitops
     spec:
       project: default
       destination:
         server: 'https://kubernetes.default.svc'
-        namespace: '{{name}}' # Deploys to the 'blue' namespace
+        namespace: '{{namespace}}' # Deploys to the 'blue' namespace
 
       source:
         repoURL: 'https://github.com/mjankula/root-app.git' 
@@ -29,7 +29,7 @@ spec:
         helm:
           parameters:
             - name: 'color'
-              value: '{{name}}' # Passes 'blue' as the Helm value
+              value: '{{color}}' # Passes 'blue' as the Helm value
       
       syncPolicy:
         automated:
