@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: ./
-    repoURL: https://gitlab-infra.apps.mgmt10.ocp.syst.ceps.cz/ocp.syst.ceps.cz/dynatrace-01/pro/argo.git
+    repoURL: https://github.com/mjankula/root-app.git
     targetRevision: main
   syncPolicy:
     automated:
