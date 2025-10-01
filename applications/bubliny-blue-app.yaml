@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: argo-bubliny-blue
   namespace: openshift-gitops 
-  annotations:
-    argocd.argoproj.io/resource-tracking: "none"
   finalizers:
     - resources-finalizer.argopdroj.io
 spec:

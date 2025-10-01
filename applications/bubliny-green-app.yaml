@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: argo-bubliny-green
   namespace: openshift-gitops 
-  annotations:
-    argocd.argoproj.io/resource-tracking: "none"
   finalizers:
     - resources-finalizer.argopdroj.io
 spec:
@@ -25,3 +23,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - DisableResourceUpdates=true
