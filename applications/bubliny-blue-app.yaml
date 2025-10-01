@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-bubliny-blue
+  namespace: openshift-gitops 
+  finalizers:
+    - resources-finalizer.argopdroj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/mjankula/bubliny-blue.git
+    targetRevision: main
+    path: templates/ 
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mjankula-ns-1
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
