@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: mjankula-ns1
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: ./
+    repoURL: https://gitlab-infra.apps.mgmt10.ocp.syst.ceps.cz/ocp.syst.ceps.cz/dynatrace-01/pro/argo.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
