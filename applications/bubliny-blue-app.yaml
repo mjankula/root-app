@@ -4,7 +4,7 @@ metadata:
   name: argo-bubliny-blue
   namespace: openshift-gitops 
   finalizers:
-    - resources-finalizer.argopdroj.io
+#    - resources-finalizer.argopdroj.io
 spec:
   project: default
 
