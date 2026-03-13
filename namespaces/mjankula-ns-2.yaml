@@ -4,4 +4,4 @@ metadata:
   name: mjankula-ns-2
   labels:
     argocd.argoproj.io/managed-by: openshift-gitops
-    datacenter: dc2
+    dc: kvm
